@@ -1,7 +1,7 @@
-package org.example.springbootjpa.configs;
+package org.example.springbootjpa.config;
 
-import org.example.springbootjpa.User;
-import org.example.springbootjpa.repositories.UserRespository;
+import org.example.springbootjpa.entities.User;
+import org.example.springbootjpa.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -13,10 +13,10 @@ import java.util.Arrays;
 @Profile("test")
 public class TesteConfig implements CommandLineRunner {
 
-    private final UserRespository userRespository;
+    private final UserRepository userRespository;
 
     @Autowired
-    public TesteConfig(UserRespository userRespository) {
+    public TesteConfig(UserRepository userRespository) {
         this.userRespository = userRespository;
     }
 

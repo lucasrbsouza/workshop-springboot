@@ -1,4 +1,4 @@
-package org.example.springbootjpa;
+package org.example.springbootjpa.entities;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
