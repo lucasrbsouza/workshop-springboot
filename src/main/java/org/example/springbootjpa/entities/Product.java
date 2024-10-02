@@ -10,11 +10,11 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-@EqualsAndHashCode(of = "id")
-@Getter@ToString
+@Getter
+@EqualsAndHashCode(of = "id")@ToString
 @Entity
-@Table(name = "tb_category")
-public class Category implements Serializable {
+@Table(name = "tb_product")
+public class Product implements Serializable {
     private static final long seriaVersionUID = 1L;
 
     @Setter
@@ -23,14 +23,24 @@ public class Category implements Serializable {
     private Long id;
     @Setter
     private String name;
+    @Setter
+    private String description;
+    @Setter
+    private Double price;
+    @Setter
+    private String imgUrl;
 
-    private Set<Product> products = new HashSet<>();
 
-    public Category() {
+    private Set<Category> categories = new HashSet<>();
+
+    public Product() {
     }
 
-    public Category(Long id, String name ) {
+    public Product(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
         this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imgUrl = imgUrl;
     }
 }
