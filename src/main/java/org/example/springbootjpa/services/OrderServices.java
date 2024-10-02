@@ -1,24 +1,27 @@
 package org.example.springbootjpa.services;
 
+import org.example.springbootjpa.entities.Order;
 import org.example.springbootjpa.entities.User;
+import org.example.springbootjpa.repositories.OrderRepository;
 import org.example.springbootjpa.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserServices {
+public class OrderServices {
 
-    private final UserRepository respository;
+    private final OrderRepository respository;
 
-    public UserServices(UserRepository respository) {
+    public OrderServices(OrderRepository respository) {
         this.respository = respository;
     }
 
-    public List<User> findAll() {
+    public List<Order> findAll() {
         return respository.findAll();
     }
-    public User findById(Long id){
+    public Order findById(Long id){
         return respository.findById(id).get();
     }
 }
