@@ -1,14 +1,8 @@
 package org.example.springbootjpa.config;
 
-import org.example.springbootjpa.entities.Category;
-import org.example.springbootjpa.entities.Order;
-import org.example.springbootjpa.entities.Product;
-import org.example.springbootjpa.entities.User;
+import org.example.springbootjpa.entities.*;
 import org.example.springbootjpa.entities.enums.OrderStatus;
-import org.example.springbootjpa.repositories.CategoryRepository;
-import org.example.springbootjpa.repositories.OrderRepository;
-import org.example.springbootjpa.repositories.ProductRepository;
-import org.example.springbootjpa.repositories.UserRepository;
+import org.example.springbootjpa.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -24,12 +18,14 @@ public class TesteConfig implements CommandLineRunner {
     private final OrderRepository orderRespository;
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
+    private final OrdeItemRepository ordeItemRepository;
 
-    public TesteConfig(UserRepository userRespository, OrderRepository orderrRespository, CategoryRepository categoryRepository, ProductRepository productRepository) {
+    public TesteConfig(UserRepository userRespository, OrderRepository orderrRespository, CategoryRepository categoryRepository, ProductRepository productRepository, OrdeItemRepository ordeItemRepository) {
         this.userRespository = userRespository;
         this.orderRespository = orderrRespository;
         this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
+        this.ordeItemRepository = ordeItemRepository;
     }
 
 
@@ -63,6 +59,13 @@ public class TesteConfig implements CommandLineRunner {
         p4.getCategories().add(cat3);
         p5.getCategories().add(cat2);
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+        ordeItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
     }
 
 }

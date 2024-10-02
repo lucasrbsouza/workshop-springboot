@@ -10,6 +10,8 @@ import org.example.springbootjpa.entities.enums.OrderStatus;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @EqualsAndHashCode(of = "id")
@@ -30,6 +32,9 @@ public class Order implements Serializable {
     private User client;
 
     private Integer orderStatus;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order() {
     }
