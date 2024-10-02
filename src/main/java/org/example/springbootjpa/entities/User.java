@@ -7,27 +7,36 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
-@Setter
 @EqualsAndHashCode(of = "id")
 @ToString
 @Entity
 @Table(name = "tb_user")
-public class User implements Serializable{
+public class User implements Serializable {
     private static final long seriaVersionUID = 1L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Setter private Long id;
+
     @Column(length = 100)
-    private String name;
+    @Setter private String name;
+
     @Column(length = 200)
-    private String email;
+    @Setter private String email;
+
     @Column(length = 10)
-    private String phone;
+    @Setter private String phone;
+
     @Column
-    private String password;
+    @Setter private String password;
+
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
 
     public User() {
     }
