@@ -1,11 +1,12 @@
 package org.example.springbootjpa.config;
 
+import org.example.springbootjpa.entities.Category;
 import org.example.springbootjpa.entities.Order;
 import org.example.springbootjpa.entities.User;
 import org.example.springbootjpa.entities.enums.OrderStatus;
+import org.example.springbootjpa.repositories.CategoryRepository;
 import org.example.springbootjpa.repositories.OrderRepository;
 import org.example.springbootjpa.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -18,11 +19,13 @@ import java.util.Arrays;
 public class TesteConfig implements CommandLineRunner {
 
     private final UserRepository userRespository;
-    private final OrderRepository orderrRespository;
+    private final OrderRepository orderRespository;
+    private final CategoryRepository categoryRepository;
 
-    public TesteConfig(UserRepository userRespository, OrderRepository orderrRespository) {
+    public TesteConfig(UserRepository userRespository, OrderRepository orderrRespository, CategoryRepository categoryRepository) {
         this.userRespository = userRespository;
-        this.orderrRespository = orderrRespository;
+        this.orderRespository = orderrRespository;
+        this.categoryRepository = categoryRepository;
     }
 
 
@@ -35,7 +38,12 @@ public class TesteConfig implements CommandLineRunner {
         Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u1, OrderStatus.DELIVERED);
         Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2, OrderStatus.PAID);
         Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1, OrderStatus.WAITING_PAYMENT);
-        orderrRespository.saveAll(Arrays.asList(o1, o2, o3));
+        orderRespository.saveAll(Arrays.asList(o1, o2, o3));
+
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
     }
 
 }
