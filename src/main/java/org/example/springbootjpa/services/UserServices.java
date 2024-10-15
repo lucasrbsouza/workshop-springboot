@@ -18,15 +18,30 @@ public class UserServices {
     public List<User> findAll() {
         return respository.findAll();
     }
-    public User findById(Long id){
+
+    public User findById(Long id) {
         return respository.findById(id).get();
     }
 
-    public User insert(User obj){
+    public User insert(User obj) {
         return respository.save(obj);
     }
 
-    public void delete (Long id){
+    public void delete(Long id) {
         respository.deleteById(id);
     }
+
+    public User update(Long id, User obj) {
+        User entity = respository.getReferenceById(id);
+        updateData(entity, obj);
+
+        return respository.save(entity);
+    }
+
+    private void updateData(User entity, User obj) {
+        entity.setName(obj.getName());
+        entity.setEmail(obj.getEmail());
+        entity.setPhone(obj.getPhone());
+    }
+
 }
