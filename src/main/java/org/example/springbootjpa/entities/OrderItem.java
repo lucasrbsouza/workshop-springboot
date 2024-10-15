@@ -46,6 +46,9 @@ public class OrderItem implements Serializable {
     }
 
 
+    public double getSubTotal(){
+        return price * quantity;
+    }
     public Product getProduct() {
         return id.getProduct();
     }
