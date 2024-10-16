@@ -2,7 +2,10 @@ package org.example.springbootjpa.services;
 
 import org.example.springbootjpa.entities.User;
 import org.example.springbootjpa.repositories.UserRepository;
+import org.example.springbootjpa.services.exceptions.DatabaseException;
 import org.example.springbootjpa.services.exceptions.ResourceNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +32,14 @@ public class UserServices {
     }
 
     public void delete(Long id) {
-        respository.deleteById(id);
+        try {
+            respository.deleteById(id);
+        }catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFoundException(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DatabaseException(e.getMessage());
+        }
+
     }
 
     public User update(Long id, User obj) {
