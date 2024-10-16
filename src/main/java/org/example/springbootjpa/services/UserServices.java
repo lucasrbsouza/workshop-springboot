@@ -1,5 +1,6 @@
 package org.example.springbootjpa.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.example.springbootjpa.entities.User;
 import org.example.springbootjpa.repositories.UserRepository;
 import org.example.springbootjpa.services.exceptions.DatabaseException;
@@ -34,19 +35,23 @@ public class UserServices {
     public void delete(Long id) {
         try {
             respository.deleteById(id);
-        }catch (EmptyResultDataAccessException e){
+        } catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException(id);
-        }catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
 
     }
 
     public User update(Long id, User obj) {
-        User entity = respository.getReferenceById(id);
-        updateData(entity, obj);
+        try {
+            User entity = respository.getReferenceById(id);
+            updateData(entity, obj);
+            return respository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
 
-        return respository.save(entity);
+        }
     }
 
     private void updateData(User entity, User obj) {
