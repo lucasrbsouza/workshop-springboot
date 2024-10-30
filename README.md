@@ -1,4 +1,4 @@
-# Spring Boot JPA Project
+# Workshop github
 
 Este projeto é uma aplicação Java desenvolvida com Spring Boot e JPA para gerenciar uma estrutura básica de comércio eletrônico. Ele contém entidades, repositórios, serviços e recursos necessários para operações CRUD e manipulação de dados relacionados a categorias, produtos, pedidos e usuários.
 
